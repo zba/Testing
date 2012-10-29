@@ -1,62 +1,388 @@
-<!doctype html>
-<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
-<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on http://github.com/jonrohan -->
-<html>
+<!doctype html>  
+<!-- Jason Woolard -->
+<!-- MiU 1211 - Project 2 -->
+<!-- index.html -->
+<!-- Running Tracker -->
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen"/>
-  <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <script type="text/javascript" src="javascripts/script.js"></script>
-
-  <title>Testing</title>
-  <meta name="description" content="">
-
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta charset="utf-8">
+	
+	<title>Running Tracker</title>
+	
+	<!--  Mobile viewport optimized: j.mp/bplateviewport -->
+	<meta name="HandheldFriendly" content="True">
+	<meta name="MobileOptimized" content="320"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<!-- Mobile IE needs ClearType for smoothing fonts -->
+	<meta http-equiv="cleartype" content="on">
+	
+	<!-- StyleSheets under here -->
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/styles.css" media="screen">
+	<link rel="stylesheet" type="text/css" href="http://dev.jtsage.com/cdn/datebox/latest/jqm-datebox.min.css" /> 
+	<link rel="stylesheet" type="text/css" href="http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog.min.css" /> 
+	
+	<!-- JavaScript is normally at the end of the body, except for Modernizr which enables HTML5 elements & feature detects -->
+	<script src="js/libs/modernizr.custom.min.js"></script>
 
 </head>
-
 <body>
+	<!-- Start of Home Page -->
+	<div data-role="page" id="home" style="min-height:960px;" data-theme='b'>
 
-  <div class="wrapper">
-    <header>
-      <h1 class="title">Testing</h1>
-    </header>
-    <div id="container">
-      <p class="tagline"></p>
-      <div id="main" role="main">
-        <div class="download-bar">
-        <div class="inner">
-          <a href="https://github.com/zba/Testing/tarball/master" class="download-button tar"><span>Download</span></a>
-          <a href="https://github.com/zba/Testing/zipball/master" class="download-button zip"><span>Download</span></a>
-          <a href="https://github.com/zba/Testing" class="code">View Testing on GitHub</a>
+		<div data-role="header" data-position='fixed' data-theme='b'>
+			<h1>Running Tracker</h1>
+			<a href="#news" id="addNews" data-icon="info" class="ui-btn-right" data-direction="forward">News</a>
+		</div>
+
+		<div data-role="content">
+			<a href="#additem"><img src="img/cta.png" width="100%" alt="Add Run Record!"></a>
+			<br>
+				<ul data-role="listview" data-inset="true" data-theme="c">
+					<li data-role="list-divider">Browse by Run </li>
+					<li><a href="#distance">Distance Runs <span class="ui-li-count">0</span></a></li>
+					<li><a href="#endurance">Endurance Runs <span class="ui-li-count">0</span></a></li>
+					<li><a href="#group">Group Runs<span class="ui-li-count">0</span></a></li>
+					<li><a href="#marathon">Marathon Runs <span class="ui-li-count">0</span></a></li>
+					<li><a href="#timed">Timed Runs <span class="ui-li-count">0</span></a></li>
+					<li data-role="list-divider"></li>
+				</ul>
         </div>
-        <span class="blc"></span><span class="trc"></span>
+
+        <div data-role="footer" data-position="fixed" data-theme='b'>
+			<!-- Navbar -->
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#home" data-icon="home" data-iconpos="left">Home</a></li>
+					<li><a href="#about" data-icon="info" data-iconpos="left">About</a></li>
+					<li><a href="#otherApp" data-icon="check" data-iconpos="left">Gold App</a></li>
+				</ul>
+			</div>
         </div>
-        <article class="markdown-body">
-          <p>page</p>
-        </article>
-      </div>
-    </div>
-    <footer>
-      <div class="owner">
-      <p><a href="https://github.com/zba" class="avatar"><img src="https://secure.gravatar.com/avatar/ef59545dc02685334418ee23a2f30777?s=30&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" width="48" height="48"/></a> <a href="https://github.com/zba">zba</a> maintains <a href="https://github.com/zba/Testing">Testing</a></p>
+	</div>
+
+	<!-- Start of AddItem Page -->
+	<div data-role="page" id="additem">
+		<div data-role="header" data-position='fixed' data-theme='b'>
+			<a href="#" id="addBack" data-icon="arrow-l" data-rel="back" data-direction="reverse">Back</a>
+			<a href="#search" id="addSearch" data-icon="search" class="ui-btn-right" data-direction="forward" data-transition="slidedown" data-iconpos="notext">Search</a>
+			<h1>Running Tracker</h1>
+		</div>
+		<article id="article">
+		<div data-role="content">
+			<p>
+			<a href="#showAll">Display Data</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="#" id="clearAll">Clear Stored Data</a>
+			</p>
+				<!-- Required form -->
+				<form id="runRecForm" action="#" method="post">
+					<ul data-role="listview" data-inset="true" data-theme="c">
+						<li data-role="list-divider">Run Info</li>
+						<span class="required"><span>* </span>Required Fields</span>
+						<ul id="errors"></ul>
+			
+						
+                        <li><div id="select"><label for="rStyle">Choose Run Style*</label></div></li>
+                        
+					
+
+						<li><label for="rLocation"></label><input type="text" class="required" data-mini="true" id="rLocation" value="Running Location*" onFocus="clearText(this)" onBlur="clearText(this)"></li>
+						<li><label for="runDate"></label><input type="date" data-mini="true" name="runDate" id="runDate" class="required date"></li>
+						<li><label for="rComments"></label> <textarea id="rComments" class="required" data-mini="true" onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;">Run Comments*</textarea></li>
+						<li><label for="hydrated">Properly Hydrated?</label><input type="checkbox" data-mini="true" checked value="Properly hydrated?" id="hydrated"></li>
+						
+						<li><label for="howLong">How long did your run last?&nbsp;-&nbsp;<output id="rangevalue">0</output>&nbsp;Hour(s)&nbsp;-</label><input type="range" data-mini="true" data-theme="b" id="howLong" min="0.5" max="10" step="0.5" value="0" onchange="rangevalue.value=value"></li>
+						<li><label for="howFar">How many miles did you run? &nbsp;-&nbsp;<output id="rangevalue2">0</output>&nbsp;Mile(s)&nbsp;- </label><input type="range" data-mini="true" data-theme="b" id="howFar" value="0" step="0.1" min="0.1" max="20" onchange="rangevalue2.value=value"></li>
+
+							<li>
+                    		<fieldset data-role="controlgroup" data-mini="true" data-type="horizontal">
+                        		<legend>Time of day you ran:</legend>
+								<input type="radio" value="morning" id="morning" name="timeOfDay"><label for="morning">Morning</label>
+								<input type="radio" value="afternoon" id="afternoon" name="timeOfDay"><label for="afternoon">Afternoon</label>
+								<input type="radio" value="evening" id="evening" name="timeOfDay"><label for="evening">Evening</label>
+                    		</fieldset>
+            				</li>
+						<li data-role="list-divider"></li>
+					</ul>
+						<input type="submit" data-mini="true" class="button" name="save" id="submit" value="Add Mileage"/>
+						<input type="reset" data-mini="true" class="button" name="clear" id="reset" value="Clear Form">
+
+					
+				</form>
+		</div>
+	</article>
+		<div data-role="footer" data-position="fixed" data-theme='b'>
+			<!-- Navbar -->
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#home" data-icon="home" data-iconpos="left">Home</a></li>
+					<li><a href="#errorPage" data-icon="info" data-iconpos="left">Gh-Pages</a></li>
+					<li><a href="#errorPage" data-icon="check" data-iconpos="left">Gold App</a></li>
+				</ul>
+			</div>
+        </div>
+	</div>
+	<!-- Start of News Page -->
+	<div data-role="page" id="news">
+		<div data-role="header" data-position='fixed' data-theme='b'>
+			<a href="#" id="addBack" data-icon="arrow-l" data-rel="back" data-direction="reverse">Back</a>
+			<a href="#search" id="addSearch" data-icon="search" class="ui-btn-right" data-direction="forward" data-transition="slidedown" data-iconpos="notext">Search</a>
+			<h1>Running Tracker</h1>
+		</div>
+
+	<!--  News Page Content -->
+		<div data-role="content">
+
+			<ul data-role="listview" data-filter="true" data-filter-theme="d">
+				<li>
+					<a href="#errorPage">
+						<img src="img/news.png">
+						<h4>How you can lose weight 50% quicker!</h4>
+						<span><small>by: Jason Woolard</small></span>
+						<p>10/28/2012 - 2:00pm<br />Tags: WeightLoss, FastWeightLoss</p>
+					</a>
+				</li>
+
+				<li>
+					<a href="#errorPage">
+						<img src="img/news.png">
+						<h4>How you can obtain a free pair of Nikes!</h4>
+						<span><small>by: Jason Woolard</span></small>
+						<p>10/27/2012 - 1:00pm<br />Tags: FreeStuff, FreeNikes, Free</p>
+					</a>
+				</li>
+
+				<li>
+					<a href="#errorPage">
+						<img src="img/news.png">
+						<h4>Looking to get your core defined?</h4>
+						<span><small>by: Jason Woolard</small></span>
+						<p>10/26/2012 - 12:12pm<br />Tags: Core, Tone, Abs</p>
+					</a>
+				</li>
+
+				<li>
+					<a href="#errorPage">
+						<img src="img/news.png">
+						<h4>Top 10 workout songs of 2012.</h4>
+						<span><small>by: Jason Woolard</small></span>
+						<p>10/25/2012 - 2:00pm<br />Tags: WorkoutMusic, Music, GoodMusic</p>
+					</a>
+				</li>
+
+				<li>
+					<a href="#errorPage">
+						<img src="img/news.png">
+						<h4>How you can improve your heart rate.</h4>
+						<span><small>by: Jason Woolard</small></span>
+						<p>10/24/2012 - 1:02pm<br />Tags: Cardio, Heart Rate</p>
+					</a>
+				</li>
+
+				<li>
+					<a href="#errorPage">
+						<img src="img/news.png">
+						<h4>Glow belts save lives.</h4>
+						<span><small>by: Jason Woolard</small></span>
+						<p>10/23/2012 - 1:10pm<br />Tags: SafetyGear, SafetyEqupiment</p>
+					</a>
+				</li>
+
+				<li>
+					<a href="#errorPage">
+						<img src="img/news.png">
+						<h4>How to avoid injuries while running.</h4>
+						<span><small>by Jason Woolard</small></span>
+						<p>10/22/2012 - 2:20am<br />Tags: Injury, Safety</p>
+					</a>
+				</li>
+
+				<li>
+					<a href="#errorPage">
+						<img src="img/news.png">
+						<h4>Launch of Running Tracker!</h4>
+						<span><small>by Staff</small></span>
+						<p>10/21/2012 - 6:00pm<br />Tags: Launch, GrandOpening</p>
+					</a>
+				</li>
+
+			</ul>
+
+		</div>
+
+		<!-- Navbar -->
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#home" data-icon="home" data-iconpos="left">Home</a></li>
+				<li><a href="#errorPage" data-icon="info" data-iconpos="left">Gh-Pages</a></li>
+				<li><a href="#errorPage" data-icon="check" data-iconpos="left">Gold App</a></li>
+			</ul>
+		</div>
+	</div>
+
+		<!-- Start of Search Page -->
+		<div data-role="page" id="search">
+			<div data-role="header" data-position='fixed' data-theme='b'>
+				<a href="#" id="addBack" data-icon="arrow-l" data-rel="back" data-direction="reverse">Back</a>
+				<a href="#" id="addSettingRev" data-icon="search" data-rel="back" data-direction="slideup" data-iconpos="notext">Search</a>
+				<h1>Running Tracker</h1>
+			</div>
+			<!--  Search Page Content -->
+			<div data-role="content">
+								
+			</div>
+		</div>
+		<!-- Start of errorPage Page -->
+		<div data-role="page" id="errorPage">
+
+			<div data-role="header" data-position='fixed' data-theme='b'>
+				<a href="#" id="addBack" data-icon="arrow-l" data-rel="back" data-direction="reverse">Back</a>
+				<a href="#search" id="addSearch" data-icon="search" class="ui-btn-right" data-direction="forward" data-transition="slidedown" data-iconpos="notext">Search</a>
+				<h1>Running Tracker</h1>
+			</div>
+			<!--  errorPage Page Content -->
+			<div data-role="content" class="container">
+				<img src="img/errorPage.jpg" alt="Page not found!" class="center" />		
+			</div>
+			<!-- Navbar -->
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#home" data-icon="home" data-iconpos="left">Home</a></li>
+					<li><a href="#errorPage" data-icon="info" data-iconpos="left">Gh-Pages</a></li>
+					<li><a href="#errorPage" data-icon="check" data-iconpos="left">Gold App</a></li>
+				</ul>
+			</div>
+		</div>
+		<!-- Show All Page -->
+        <div id="showAll" data-role="page" data-add-back-btn="true" data-theme="b">
+            <!-- Page Header -->
+
+			<div data-role="header" data-position='fixed' data-theme='b'>
+				<a href="#" id="addBack" data-icon="arrow-l" data-rel="back" data-direction="reverse">Back</a>
+				<a href="#search" id="addSearch" data-icon="search" class="ui-btn-right" data-direction="forward" data-transition="slidedown" data-iconpos="notext">Search</a>
+				<h1>Running Tracker</h1>
+			</div>
+
+            <!-- Page Content -->
+            <div data-role="content" data-theme="b">
+                <div id="allContent">
+                    
+                </div>
+                
+            </div>
+            <!-- Page Footer -->
+            <div data-role="navbar">
+				<ul>
+					<li><a href="#home" data-icon="home" data-iconpos="left">Home</a></li>
+					<li><a href="#errorPage" data-icon="info" data-iconpos="left">Gh-Pages</a></li>
+					<li><a href="#errorPage" data-icon="check" data-iconpos="left">Gold App</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- Distance Page -->
+        <div id="distance" data-role="page" data-add-back-btn="true" data-theme="b">
+            <!-- Page Header -->
 
 
-      </div>
-      <div class="creds">
-        <small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br/>theme by <a href="http://twitter.com/jonrohan/">Jon Rohan</a></small>
-      </div>
-    </footer>
-  </div>
-  <div class="current-section">
-    <a href="#top">Scroll to top</a>
-    <a href="https://github.com/zba/Testing/tarball/master" class="tar">tar</a><a href="https://github.com/zba/Testing/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
-    <p class="name"></p>
-  </div>
+            <!-- Page Content -->
+            <div data-role="content" data-theme="b">
+                <div id="DistanceContent">
+                    
+                </div>
+                
+            </div>
+            <!-- Page Footer -->
+           
 
-  
+        </div>
+		<!-- Endurance Page -->
+        <div id="endurance" data-role="page" data-add-back-btn="true" data-theme="b">
+            <!-- Page Header -->
+
+
+            <!-- Page Content -->
+            <div data-role="content" data-theme="b">
+                <div id="EnduranceContent">
+                    
+                </div>
+                
+            </div>
+            <!-- Page Footer -->
+           
+
+        </div>
+        		<!-- Group Page -->
+        <div id="group" data-role="page" data-add-back-btn="true" data-theme="b">
+            <!-- Page Header -->
+
+
+            <!-- Page Content -->
+            <div data-role="content" data-theme="b">
+                <div id="GroupContent">
+                    
+                </div>
+                
+            </div>
+            <!-- Page Footer -->
+           
+
+        </div>
+        		<!-- Marathon Page -->
+        <div id="marathon" data-role="page" data-add-back-btn="true" data-theme="b">
+            <!-- Page Header -->
+
+
+            <!-- Page Content -->
+            <div data-role="content" data-theme="b">
+                <div id="MarathonContent">
+                    
+                </div>
+                
+            </div>
+            <!-- Page Footer -->
+           
+
+        </div>
+
+        		<!-- Timed Page -->
+        <div id="timed" data-role="page" data-add-back-btn="true" data-theme="b">
+            <!-- Page Header -->
+
+
+            <!-- Page Content -->
+            <div data-role="content" data-theme="b">
+                <div id="TimedContent">
+                    
+                </div>
+                
+            </div>
+            <!-- Page Footer -->
+           
+
+        </div>
+
+ <!-- JavaScript under here -->
+ <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+ <script src="js/libs/jquery.validate.min.js"></script>
+ <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+ <script type="text/javascript" src="http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog2.min.js"></script>
+ <script type="text/javascript" src="js/main.js"></script>
+ <script src="js/json.js"></script>
+ <script type="text/javascript">
+	function setbg(color) {
+	document.getElementById("rComments").style.background=color
+	}
+ </script>
+ <script type="text/javascript">
+	function clearText(field){
+ 
+    if (field.defaultValue == field.value) field.value = '';
+    else if (field.value == '') field.value = field.defaultValue;
+ 
+	}
+</script>
 </body>
 </html>
