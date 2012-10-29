@@ -1,0 +1,30 @@
+span.required, #errors li {
+	color: black;
+	text-shadow: 0 0 2px blue;
+	font-size: 12px;
+}
+
+li {
+    list-style-type: none;
+}
+img.center {   
+    display: block;   
+    margin-left: auto;   
+    margin-right: auto; 
+}
+.container{
+    background-color: white;
+}
+
+#cvIndexBrowse {
+    padding: 0 15px 15px 15px;
+}
+article {
+    margin: 10px;
+}
+.ui-page { -webkit-backface-visibility: hidden; }
+
+
+.ui-selectmenu-hidden { 
+display: none; 
+}
