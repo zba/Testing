@@ -5,23 +5,23 @@
 	- main.js
 */
 	//jQuery calls
-$(function() {
+$(document).bind('pageinit',function() {
     $("#additem").on("pagecreate", function(){
     makeRunRecord();
 	});
     $("#additem").on("pageinit", function(){
     save.click(validate);
 	});
-    $('#showAll').on("pagecreate", function() {
-    if (localStorage.length === 0){
+    $('#showAll').on("pagecreate pageshow pageinit",function() {
+      if (localStorage.length === 0){
         autoFillData();
-    }
-    	getData("all");
-	});
-	$("#clearAll").bind("click", function(){
+      }
+      getData("all");
+     });
+    $("#clearAll").bind("click", function(){
     	clearData();
 	});
-	$('#distance').on("pagecreate", function() {
+    $('#distance').on("pagecreate", function() {
     if (localStorage.length === 0){
         autoFillData();
     }
@@ -152,7 +152,7 @@ $(function() {
 	};
 
 	// Writes the Data from Local Storage to the browser.
-	function getData(id) {
+	var getData=function (id) {
 		//toggleControls("on");
 		if(localStorage.length === 0) {
 			alert("There is no data in Local Storage. \n Default Data was added!");
@@ -160,6 +160,7 @@ $(function() {
 		}
 		var category = id;
 		var makeUl = document.createElement('ul');
+		$('#'+id+'Content').children().remove();
 		ge(id+'Content').appendChild(makeUl);
         makeUl.setAttribute("id", id+"items");
         makeUl.setAttribute("data-role", "listview");
@@ -206,13 +207,13 @@ $(function() {
             }
         }
 	    //Sort the list items by id
-	    $(function(){
+	    //$(function(){
 	        var elems = $('#'+id+'items').children('div').remove();
 	        elems.sort(function(a,b){
 	            return parseInt(a.id) > parseInt(b.id);
 	        });
 	        $('#'+id+'items').append(elems);
-	    });
+	    //});
 	};
 	// Get the image for the right category that is displayed
 	function getImage(imgName, makeSubList) {
@@ -344,7 +345,7 @@ $(function() {
 				radios[i].setAttribute("checked", "checked");
 			}else if (radios[i].value == "evening" && item.timeOfDay[1] == "evening") {
 				radios[i].setAttribute("checked", "checked");
-			}*/
+			}}*/
 
 		// Remove initial event listener from input save record button
 		//ge('article').removeChild(ge('items'));
@@ -469,7 +470,8 @@ function validate(e){
 	save = $("#submit"),
 	errMsg = $('#errors');
 	;
-
+$('.ui-page-active').trigger('pagecreate');
+});
 	// Set Link & Submit Click Events 
 	//var displayLink = ge('showData');
 	//displayLink.addEventListener("click", getData);
@@ -487,4 +489,4 @@ function validate(e){
         // $('#timeselect').selectmenu('refresh');
       // console.log('Opening time select in 300ms...');
       // setTimeout("$('#timeselect').selectmenu('open');", 300)
-});
+
