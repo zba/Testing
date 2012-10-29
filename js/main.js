@@ -5,6 +5,7 @@
 	- main.js
 */
 	//jQuery calls
+$(function() {
     $("#additem").on("pagecreate", function(){
     makeRunRecord();
 	});
@@ -486,3 +487,4 @@ function validate(e){
         // $('#timeselect').selectmenu('refresh');
       // console.log('Opening time select in 300ms...');
       // setTimeout("$('#timeselect').selectmenu('open');", 300)
+});
